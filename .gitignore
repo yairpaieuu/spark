@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+*/node_modules/
+package-lock.json
+*/package-lock.json
+
+# Build outputs
+frontend/build/
+backend/screenshots/
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+
+# Misc
+.eslintcache
