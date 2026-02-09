@@ -16,8 +16,7 @@ A full-stack React + Node.js application that generates beautiful website screen
 ### Backend
 - **Node.js** - Runtime environment
 - **Express** - Web framework
-- **Playwright** - Headless browser automation for screenshots
-- **Canvas** - Image manipulation for overlay rendering
+- **Playwright** - Headless browser automation for screenshots with DOM-based overlay injection
 - **CORS** - Cross-origin resource sharing
 
 ### Frontend

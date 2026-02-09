@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const { chromium } = require('playwright');
-const sharp = require('sharp');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
