@@ -20,8 +20,8 @@ A full-stack React + Node.js application that generates website screenshots at a
 
 ### Backend
 - Node.js with Express
-- Playwright for browser automation
-- Canvas API for image manipulation
+- Playwright for browser automation and screenshot capture
+- DOM manipulation for overlay injection
 - CORS enabled for cross-origin requests
 
 ## Project Structure
@@ -69,8 +69,7 @@ npm install
 
 This will install:
 - Express (web framework)
-- Playwright (browser automation)
-- Canvas (image manipulation)
+- Playwright (browser automation and screenshot generation)
 - CORS (cross-origin resource sharing)
 
 **Note:** Playwright will automatically download the necessary browser binaries during installation. This may take a few minutes.
@@ -246,21 +245,6 @@ PORT=5001 npm start
 ```
 
 **Frontend:** Edit `frontend/package.json` proxy to match backend port.
-
-### Canvas Module Build Errors
-
-The `canvas` module requires build tools. On Linux:
-
-```bash
-sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
-```
-
-On macOS:
-```bash
-brew install pkg-config cairo pango libpng jpeg giflib librsvg
-```
-
-On Windows, the module typically works with no additional setup on recent Node.js versions.
 
 ### CORS Issues
 

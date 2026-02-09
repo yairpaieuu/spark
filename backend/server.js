@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const { chromium } = require('playwright');
-const { createCanvas, loadImage } = require('canvas');
 const path = require('path');
 const fs = require('fs').promises;
 
@@ -38,6 +37,28 @@ async function captureScreenshot(url, siteName) {
       timeout: 30000 
     });
     
+    // Inject the overlay directly into the page before taking screenshot
+    await page.evaluate((siteName) => {
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100%';
+      overlay.style.height = '60px';
+      overlay.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.style.zIndex = '999999';
+      overlay.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+      overlay.style.fontFamily = 'Arial, sans-serif';
+      overlay.style.fontSize = '28px';
+      overlay.style.fontWeight = 'bold';
+      overlay.style.color = '#ffffff';
+      overlay.textContent = siteName;
+      document.body.prepend(overlay);
+    }, siteName);
+    
     // Take screenshot
     const screenshotBuffer = await page.screenshot({
       type: 'png',
@@ -47,42 +68,7 @@ async function captureScreenshot(url, siteName) {
     await browser.close();
     browser = null;
     
-    // Create canvas for overlay
-    const canvas = createCanvas(1280, 1280);
-    const ctx = canvas.getContext('2d');
-    
-    // Load the screenshot onto canvas
-    const screenshotImg = await loadImage(screenshotBuffer);
-    ctx.drawImage(screenshotImg, 0, 0);
-    
-    // Draw top bar overlay
-    const barHeight = 60;
-    const gradient = ctx.createLinearGradient(0, 0, 1280, 0);
-    gradient.addColorStop(0, '#667eea');
-    gradient.addColorStop(1, '#764ba2');
-    
-    // Draw semi-transparent bar
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 1280, barHeight);
-    
-    // Add subtle shadow
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-    ctx.shadowBlur = 10;
-    ctx.shadowOffsetY = 2;
-    ctx.fillRect(0, 0, 1280, barHeight);
-    ctx.shadowColor = 'transparent';
-    
-    // Draw site name text
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 28px Arial, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(siteName, 640, barHeight / 2);
-    
-    // Convert canvas to buffer
-    const finalBuffer = canvas.toBuffer('image/png');
-    
-    return finalBuffer;
+    return screenshotBuffer;
     
   } catch (error) {
     if (browser) {
