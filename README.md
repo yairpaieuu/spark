@@ -44,7 +44,6 @@ npm install
 This will install:
 - Express (web server)
 - Playwright (browser automation for screenshots)
-- Canvas (image manipulation for overlays)
 - CORS (cross-origin resource sharing)
 
 ### 2. Install Playwright Browsers
@@ -189,7 +188,8 @@ The application uses **Playwright** with the following configuration:
 - **Background**: Gradient from indigo to purple with 95% opacity
 - **Font**: Bold Arial, 28px for site name
 - **Secondary Text**: 14px for URL display
-- **Shadow**: 10px blur with 2px offset for depth
+- **Shadow**: Subtle shadow with 10px blur for depth
+- **Implementation**: DOM injection technique (no native dependencies)
 
 ## Troubleshooting
 
@@ -217,7 +217,6 @@ npx playwright install chromium
 - express: ^4.18.2
 - cors: ^2.8.5
 - playwright: ^1.40.0
-- canvas: ^2.11.2
 
 ### Frontend
 - react: ^19.2.0
