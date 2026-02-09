@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const { chromium } = require('playwright');
 const path = require('path');
-const fs = require('fs').promises;
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -10,9 +9,13 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Create screenshots directory if it doesn't exist
+// Create screenshots directory if it doesn't exist (sync to ensure it exists before server starts)
 const screenshotsDir = path.join(__dirname, 'screenshots');
-fs.mkdir(screenshotsDir, { recursive: true });
+try {
+  require('fs').mkdirSync(screenshotsDir, { recursive: true });
+} catch (err) {
+  if (err.code !== 'EEXIST') throw err;
+}
 
 async function captureScreenshot(url, siteName) {
   let browser;

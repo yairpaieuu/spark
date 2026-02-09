@@ -168,7 +168,7 @@ Edit `backend/server.js` to customize:
 
 - **Port:** Change `PORT` environment variable (default: 5000)
 - **Viewport Size:** Modify the viewport dimensions in the `captureScreenshot` function
-- **Overlay Style:** Customize gradient colors, font size, bar height in the canvas drawing code
+- **Overlay Style:** Customize gradient colors, font size, bar height in the DOM injection code via `page.evaluate()`
 - **Timeout:** Adjust the `timeout` value for page navigation (default: 30000ms)
 
 ### Frontend Configuration
