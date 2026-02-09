@@ -1,0 +1,21 @@
+{
+  "name": "screenshot-generator-backend",
+  "version": "1.0.0",
+  "description": "Backend service for generating website screenshots with custom overlays",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["screenshot", "playwright", "express"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
