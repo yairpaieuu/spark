@@ -53,6 +53,7 @@ app.post('/api/screenshot', async (req, res) => {
     // Add overlay with site name
     await page.evaluate((siteName) => {
       const overlay = document.createElement('div');
+      overlay.id = 'screenshot-overlay';
       overlay.style.cssText = `
         position: fixed;
         top: 0;
@@ -84,8 +85,8 @@ app.post('/api/screenshot', async (req, res) => {
       document.head.appendChild(style);
     }, siteName);
 
-    // Wait a bit for overlay to render
-    await page.waitForTimeout(500);
+    // Wait for overlay to be visible
+    await page.waitForSelector('#screenshot-overlay', { state: 'visible' });
 
     // Take screenshot
     const timestamp = Date.now();
